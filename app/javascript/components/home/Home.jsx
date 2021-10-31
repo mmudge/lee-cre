@@ -11,6 +11,9 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import HandymanIcon from '@mui/icons-material/Handyman'
 import WorkIcon from '@mui/icons-material/Work'
 
+import PageWrapper from '../shared/PageWrapper'
+import HomeContent from './HomeContent'
+
 const Home = () => {
   const theme = useTheme()
   const lgUp = useMediaQuery(theme.breakpoints.up('lg'))
@@ -36,9 +39,9 @@ const Home = () => {
   ]
 
   return (
-    <Container>
-      <Typography variant='h3' component='h1' color='textPrimary' align='center'>Mudge Team</Typography>
-      <Typography variant='h5' component='h2' color='textSecondary' align='center'>Commercial Real Estate</Typography>
+    <PageWrapper>
+      <Typography variant={lgUp ? 'h2' : 'h3'} component='h1' color='textPrimary' align='center'>Mudge Team</Typography>
+      <Typography variant={lgUp ? 'h5' : 'h5'} component='h2' color='textSecondary' align='center'>Commercial Real Estate</Typography>
       <Box pt={5}>
         <Typography
           variant='h6'
@@ -48,21 +51,23 @@ const Home = () => {
           sx={{fontWeight: 'normal'}}
           >We connect <strong>Buyers</strong> to <strong>Sellers</strong>, <strong>Landlords</strong> to <strong>Tenants</strong>, and <strong>Investors</strong> to <strong>Oppertunities</strong></Typography>
       </Box>
-      <Box pt={8}>
-        <Button
-          variant='contained'
-          size='large'
-          fullWidth
-          component={Link}
-          to='/listings'
-        >
-          Find a Property
-        </Button>
-        <Box mt={2}>
+      <Box pt={8} display='flex' justifyContent='center' flexDirection={lgUp ? 'row' : 'column'}>
+        <Box>
           <Button
             variant='contained'
             size='large'
-            fullWidth
+            fullWidth={lgUp ? false : true}
+            component={Link}
+            to='/listings'
+          >
+            Find a Property
+          </Button>
+        </Box>
+        <Box mt={lgUp ? 0 : 2} ml={lgUp ? 2 : 0}>
+          <Button
+            variant='contained'
+            size='large'
+            fullWidth={lgUp ? false : true}
             component={Link}
             to='/contact'
           >
@@ -70,49 +75,54 @@ const Home = () => {
           </Button>
         </Box>
       </Box>
-      <Box pt={14}>
-        <Typography variant='h4' component='h2' color='textPrimary' align='center'>Achievements</Typography>
-        <Box pt={2}>
-          <Typography variant='body1' component='h6' color='textSecondary' align='center'>Our business has thrived due to our dedication on client success, our proven process, and relentless hard work.</Typography>
-        </Box>
-        <Box display='flex' flexWrap='wrap' pt={5}>
+      <HomeContent
+        title='Achievements'
+        description='Our business has thrived due to our dedication on client success, our proven process, and relentless hard work.'
+      >
+        <Box display='flex' flexWrap={lgUp ? 'no-wrap' : 'wrap' } pt={5}>
           {
             achievementItems.map((item) => {
               return (
                 <Card
                   key={item.text}
-                  sx={{width: '50%', boxShadow: 'none', backgroundColor: 'transparent'}}
+                  sx={{width: lgUp ? '25%' : '50%', boxShadow: 'none', backgroundColor: 'transparent'}}
                   raised={false}
                 >
                   <Box p={3}>
                     <Typography variant='h3' component='h6' sx={{color: 'primary.main'}} align='center'>{item.amount}</Typography>
-                    <Typography variant='body1' component='h6' sx={{wordSpacing: '100vw' }} color='textSecondary' align='center'>{item.text}</Typography>
+                    <Typography variant='body1' component='h6' sx={{wordSpacing: lgUp ? '' : '100vw' }} color='textSecondary' align='center'>{item.text}</Typography>
                   </Box>
                 </Card>
               )
             })
           }
         </Box>
-      </Box>
-      <Box pt={14}>
-        <Typography variant='h4' component='h2' color='textPrimary' align='center'>Why Work With Us?</Typography>
-        <Box display='flex' flexDirection='column' flexWrap='wrap' pt={5}>
+      </HomeContent>
+
+      <HomeContent
+        title='Why Work With Us?'
+      >
+        <Box
+          display='flex'
+          flexDirection='column'
+          flexWrap='wrap'
+          pt={5}
+          alignItems={lgUp ? 'center' : '' }
+        >
           {
             workWithUsItems.map((item) => {
               return (
-                <Box mb={3}>
+                <Box mb={3} key={item.text}>
                   <Card
-                    key={item.text}
-                    sx={{backgroundColor: 'transparent'}}
+                    sx={{backgroundColor: 'transparent', width: lgUp ? '500px' : '100%'}}
                     variant='outlined'
-                    // raised={false}
                   >
-                    <Box p={3}>
+                    <Box p={lgUp ? 8 : 3}>
                       <Box display='flex' alignItems='center' justifyContent='center' pb={2}>
                         <Box mr={3}>
                           { item.icon }
                         </Box>
-                        <Typography variant='h5' component='h5' sx={{color: 'primary.main'}} align='center'>{item.title}</Typography>
+                        <Typography variant={lgUp ? 'h4' : 'h5'} component='h5' sx={{color: 'primary.main'}} align='center'>{item.title}</Typography>
                       </Box>
                       <Typography variant='body1' component='h6' color='textSecondary' align='center'>{item.text}</Typography>
                     </Box>
@@ -123,15 +133,15 @@ const Home = () => {
             })
           }
         </Box>
-      </Box>
-      <Box pt={14}>
-        <Typography variant='h4' component='h2' color='textPrimary' align='center'>Client Reviews</Typography>
-        <Typography variant='body1' component='h6' color='textSecondary' align='center'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</Typography>
-      </Box>
+      </HomeContent>
 
+      <HomeContent
+        title='Client Reviews'
+        description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
+      >
+      </HomeContent>
 
-
-    </Container>
+    </PageWrapper>
 
   )
 }

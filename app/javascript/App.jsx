@@ -32,9 +32,7 @@ const App = () => {
             routes.map((route) => {
               return (
                 <Route key={route.path} path={route.path}>
-                  <Box py={5}>
-                    {route.component}
-                  </Box>
+                  {route.component}
                 </Route>
               )
             })
