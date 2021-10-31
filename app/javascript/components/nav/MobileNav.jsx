@@ -7,14 +7,11 @@ import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MenuIcon from '@mui/icons-material/Menu'
+
 import Logo from '../shared/Logo'
-import HomeIcon from '@mui/icons-material/Home'
-import HandymanIcon from '@mui/icons-material/Handyman'
-import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk'
 import { Link } from "react-router-dom"
 
-
-export default function MobileNav() {
+export default function MobileNav({navItems}) {
   const [open, setOpen] = React.useState(false)
 
   const toggleDrawer = (open) => (event) => {
@@ -22,16 +19,8 @@ export default function MobileNav() {
       return
     }
 
-    console.log('drawer toggling', open)
-
     setOpen(open)
   };
-
-  const listItems = [
-    { text: 'HOME', icon: <HomeIcon />, link: '/' },
-    { text: 'OUR PROCESS', icon: <HandymanIcon />, link: '/process' },
-    { text: 'CONTACT', icon: <PhoneInTalkIcon />, link: '/contact' }
-  ]
 
   const list = () => (
     <Box
@@ -45,7 +34,7 @@ export default function MobileNav() {
       </Box>
 
       <List>
-        {listItems.map((item) => (
+        {navItems.map((item) => (
           <ListItem button key={item.text} component={Link} to={item.link}>
             <ListItemIcon>
               {item.icon}
@@ -63,13 +52,12 @@ export default function MobileNav() {
         <Box display='flex' justifyContent='space-between' alignItems='center' p={2}>
           <div>
             <Button
-              variant='container'
               size='large'
-              color='warning'
-              sx={{backgroundColor: 'primary.dark'}}
+              color="primary"
+              sx={{boxShadow: 3}}
               onClick={toggleDrawer(true)}
             >
-              <MenuIcon fontSize='large' sx={{color: 'white'}} />
+              <MenuIcon fontSize='large' sx={{color: 'text.primary'}} />
             </Button>
           </div>
           <Logo />
