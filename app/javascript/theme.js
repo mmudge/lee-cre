@@ -1,21 +1,21 @@
-import { green, amber, grey, indigo, blueGrey } from '@mui/material/colors'
+import { green, amber, grey, indigo, blueGrey, teal, cyan } from '@mui/material/colors'
 import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
   palette: {
     primary: {
-      light: indigo[700],
-      main: indigo[800],
-      dark: indigo[900]
+      light: teal[500],
+      main: teal[600],
+      dark: teal[700]
     },
     secondary: {
-      light: amber[500],
-      main: amber[600],
-      dark: amber[700]
+      light: cyan[400],
+      main: cyan[500],
+      dark: cyan[600]
     },
     text: {
-      primary: blueGrey[800],
-      secondary: blueGrey[700]
+      primary: grey[800],
+      secondary: grey[700]
     }
   }
 })

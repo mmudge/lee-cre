@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,8 +14,9 @@ const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: theme.palette.grey[200],
+  // backgroundColor: alpha(theme.palette.primary.light, 0.15),
   '&:hover': {
-    backgroundColor: theme.palette.grey[300],
+    backgroundColor: alpha(theme.palette.primary.light, 0.15),
   },
   marginLeft: 0,
   width: '100%',

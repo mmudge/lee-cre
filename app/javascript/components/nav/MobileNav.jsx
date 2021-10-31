@@ -54,7 +54,7 @@ export default function MobileNav({navItems}) {
             <Button
               size='large'
               color="primary"
-              sx={{boxShadow: 3}}
+              sx={{boxShadow: 3, zIndex: 1000, position: 'fixed', top: '16px' }}
               onClick={toggleDrawer(true)}
             >
               <MenuIcon fontSize='large' sx={{color: 'text.primary'}} />

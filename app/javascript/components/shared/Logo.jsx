@@ -9,7 +9,8 @@ const Logo = ({align}) => {
     <Link to='/' style={{ textDecoration: 'none' }}>
       <Box display='flex' justifyContent={align} alignItems='center'>
         <Box pr={1}>
-          <BusinessIcon fontSize='large' sx={{color: 'text.primary'}} />
+          {/* <BusinessIcon fontSize='large' sx={{color: 'text.primary'}} /> */}
+          <BusinessIcon fontSize='large' color='primary' />
         </Box>
         <div>
           <Box display='flex'>
