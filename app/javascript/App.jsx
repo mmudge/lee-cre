@@ -6,17 +6,21 @@ import {
 } from "react-router-dom"
 
 import Home from './components/Home'
-import About from './components/About'
-import Nav from './components/Nav'
+import Process from './components/Process'
+import Contact from './components/Contact'
+import Nav from './components/nav/Nav'
+
+import AppWrapper from './AppWrapper'
 
 const routes = [
-  { path: '/about', component: <About />},
+  { path: '/process', component: <Process />},
+  { path: '/contact', component: <Contact />},
   { path: '/', component: <Home />}
 ]
 
 const App = () => {
   return (
-    <div>
+    <AppWrapper>
       <Router forceRefresh={false}>
         <Nav />
         <Switch>
@@ -31,7 +35,7 @@ const App = () => {
           }
         </Switch>
       </Router>
-    </div>
+    </AppWrapper>
   )
 }
 
