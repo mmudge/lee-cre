@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { Link } from "react-router-dom"
 
-export default function ButtonAppBar() {
+export default function MobileNav() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

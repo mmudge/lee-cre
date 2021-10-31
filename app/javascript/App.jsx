@@ -17,7 +17,6 @@ const routes = [
 const App = () => {
   return (
     <div>
-
       <Router forceRefresh={false}>
         <Nav />
         <Switch>
