@@ -7,6 +7,7 @@ import {
 
 import Home from './components/Home'
 import About from './components/About'
+import Nav from './components/Nav'
 
 const routes = [
   { path: '/about', component: <About />},
@@ -15,19 +16,23 @@ const routes = [
 
 const App = () => {
   return (
-    <Router forceRefresh={false}>
-      <Switch>
-        {
-          routes.map((route) => {
-            return (
-              <Route key={route.path} path={route.path}>
-                {route.component}
-              </Route>
-            )
-          })
-        }
-      </Switch>
-    </Router>
+    <div>
+
+      <Router forceRefresh={false}>
+        <Nav />
+        <Switch>
+          {
+            routes.map((route) => {
+              return (
+                <Route key={route.path} path={route.path}>
+                  {route.component}
+                </Route>
+              )
+            })
+          }
+        </Switch>
+      </Router>
+    </div>
   )
 }
 
