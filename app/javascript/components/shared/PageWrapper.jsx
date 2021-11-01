@@ -17,21 +17,6 @@ const AppWrapper = ({children}) => {
     }
   }
 
-  const bgStyle = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    background: "url('images/office-bg.jpg')",
-    backgroundAttachment: 'fixed',
-    height: '100vh',
-    width: '100vw'
-  }
-
   const imgStyle = {
     position: 'fixed',
     width: '100vw',
@@ -43,8 +28,7 @@ const AppWrapper = ({children}) => {
   return (
     <div>
       <img src={BgImage} style={{...imgStyle}} />
-      <Box pt={getPadding()} sx={{position: 'relative'}}>
-
+      <Box py={getPadding()} sx={{position: 'relative'}}>
         <Container>
           { children }
         </Container>
