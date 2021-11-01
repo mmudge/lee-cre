@@ -1,9 +1,6 @@
 import React from "react"
 import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import { Link } from "react-router-dom"
 import Card from '@mui/material/Card'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -13,16 +10,17 @@ import WorkIcon from '@mui/icons-material/Work'
 
 import PageWrapper from '../shared/PageWrapper'
 import HomeContent from './HomeContent'
+import HomeMainContent from './HomeMainContent'
 
 const Home = () => {
   const theme = useTheme()
   const lgUp = useMediaQuery(theme.breakpoints.up('lg'))
 
   const achievementItems = [
-    { text: 'Properties Leased', amount: '2k+'},
+    { text: 'Properties Leased', amount: '2,000+'},
     { text: 'Properties Sold', amount: '100+'},
-    { text: 'Completed Transactions', amount: '10k+'},
-    { text: 'Successful Clients', amount: '1k+'},
+    { text: 'Completed Transactions', amount: '10,000+'},
+    { text: 'Successful Clients', amount: '1,000+'},
   ]
 
   const workWithUsItems = [
@@ -40,41 +38,7 @@ const Home = () => {
 
   return (
     <PageWrapper>
-      <Typography variant={lgUp ? 'h2' : 'h3'} component='h1' color='textPrimary' align='center'>Mudge Team</Typography>
-      <Typography variant={lgUp ? 'h5' : 'h5'} component='h2' color='textSecondary' align='center'>Commercial Real Estate</Typography>
-      <Box pt={5}>
-        <Typography
-          variant='h6'
-          component='h4'
-          color='textSecondary'
-          align='center'
-          sx={{fontWeight: 'normal'}}
-          >We connect <strong>Buyers</strong> to <strong>Sellers</strong>, <strong>Landlords</strong> to <strong>Tenants</strong>, and <strong>Investors</strong> to <strong>Oppertunities</strong></Typography>
-      </Box>
-      <Box pt={8} display='flex' justifyContent='center' flexDirection={lgUp ? 'row' : 'column'}>
-        <Box>
-          <Button
-            variant='contained'
-            size='large'
-            fullWidth={lgUp ? false : true}
-            component={Link}
-            to='/listings'
-          >
-            Find a Property
-          </Button>
-        </Box>
-        <Box mt={lgUp ? 0 : 2} ml={lgUp ? 2 : 0}>
-          <Button
-            variant='contained'
-            size='large'
-            fullWidth={lgUp ? false : true}
-            component={Link}
-            to='/contact'
-          >
-            Contact Us
-          </Button>
-        </Box>
-      </Box>
+      <HomeMainContent />
       <HomeContent
         title='Achievements'
         description='Our business has thrived due to our dedication on client success, our proven process, and relentless hard work.'
@@ -89,8 +53,23 @@ const Home = () => {
                   raised={false}
                 >
                   <Box p={3}>
-                    <Typography variant='h3' component='h6' sx={{color: 'primary.main'}} align='center'>{item.amount}</Typography>
-                    <Typography variant='body1' component='h6' sx={{wordSpacing: lgUp ? '' : '100vw' }} color='textSecondary' align='center'>{item.text}</Typography>
+                    <Typography
+                      variant='h3'
+                      component='h6'
+                      sx={{color: 'primary.main', fontWeight: 'bold'}}
+                      align='center'
+                    >
+                        {item.amount}
+                    </Typography>
+                    <Typography
+                      variant='body1'
+                      component='h6'
+                      sx={{wordSpacing: lgUp ? '' : '100vw', fontWeight: 'bold' }}
+                      color='textSecondary'
+                      align='center'
+                    >
+                      {item.text}
+                    </Typography>
                   </Box>
                 </Card>
               )
@@ -114,7 +93,7 @@ const Home = () => {
               return (
                 <Box mb={3} key={item.text}>
                   <Card
-                    sx={{backgroundColor: 'transparent', width: lgUp ? '500px' : '100%'}}
+                    sx={{backgroundColor: 'grey[100]', width: lgUp ? '500px' : '100%'}}
                     variant='outlined'
                   >
                     <Box p={lgUp ? 8 : 3}>

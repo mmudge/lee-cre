@@ -14,7 +14,15 @@ const HomeContent = ({title, description, children}) => {
       {
         description && (
         <Box pt={2}>
-          <Typography variant='body1' component='h6' color='textSecondary' align='center'>{description}</Typography>
+          <Typography
+            variant='h6'
+            component='h6'
+            color='textSecondary'
+            align='center'
+            sx={{fontWeight: 'light', width: lgUp ? '60%' : 'inherit', margin: '0 auto'}}
+          >
+            {description}
+          </Typography>
         </Box>
         )
       }
