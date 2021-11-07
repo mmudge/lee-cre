@@ -8,7 +8,7 @@ import {
 import Home from './components/home/Home'
 import Process from './components/Process'
 import Contact from './components/Contact'
-import Listings from './components/Listings'
+import Listings from './components/listings/Listings'
 import Nav from './components/nav/Nav'
 import Footer from './components/nav/Footer'
 
