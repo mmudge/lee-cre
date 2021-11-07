@@ -12,7 +12,7 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     context = gql_devise_context(User)
     result = LeeCreSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    render json: result
+    render json: result unless performed?
   rescue StandardError => e
     raise e unless Rails.env.development?
     handle_error_in_development(e)

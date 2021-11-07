@@ -4,8 +4,21 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+    field :current_user, UserType, 'Current logged in User', null: true, authenticate: true
+    def current_user
+      # token = request.headers["Authorization"].to_s
+      # User.find_for_database_authentication(authentication_token: token)
+      # context[:user_context]
+      puts '*' * 100
+      puts context.inspect
+      puts context
+      # puts context[:user]
+      # puts context[:current_user]
+      puts context[:current_resource]
+      # puts user
+      context[:current_resource]
+      # context[:current_user]
+    end
 
     field :listings, ListingType.connection_type, null: true, authenticate: false do
       description "A list of all Listings"

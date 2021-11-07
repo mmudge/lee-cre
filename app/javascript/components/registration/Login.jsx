@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import {
   useMutation,
-  gql,
-  makeVar
+  gql
 } from "@apollo/client"
 
 import PageWrapper from '../shared/PageWrapper'
@@ -22,13 +21,14 @@ const LOGIN_MUTATION = gql`
       }
       credentials {
         accessToken
+        client
+        uid
       }
     }
   }
 `
 
 const Login = () => {
-  const loggedInUser = makeVar({})
   const [userLogin, { data, loading, error }] = useMutation(LOGIN_MUTATION);
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -41,13 +41,18 @@ const Login = () => {
   }
 
   if (data) {
+    localStorage.setItem('authToken', data.userLogin.credentials.accessToken)
+    localStorage.setItem('authClient', data.userLogin.credentials.client)
+    localStorage.setItem('authUid', data.userLogin.credentials.uid)
+    console.log('auth token set', localStorage.getItem('authToken'))
+    console.log('auth client set', localStorage.getItem('authClient'))
+    console.log('auth uid set', localStorage.getItem('authUid'))
+
     loggedInUser({
       email: data.userLogin.authenticatable.email,
       token: data.userLogin.credentials.accessToken
     })
   }
-
-  console.log('logged in user', loggedInUser())
 
   return (
     <PageWrapper>
