@@ -7,7 +7,7 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :listings, ListingType.connection_type, null: true do
+    field :listings, ListingType.connection_type, null: true, authenticate: false do
       description "A list of all Listings"
       argument :query, String, required: false
     end
@@ -19,7 +19,7 @@ module Types
       listings
     end
 
-    field :listing, ListingType, null: true do
+    field :listing, ListingType, null: true, authenticate: false do
       description "A single Listing found by ID"
       argument :id, ID, required: true
     end

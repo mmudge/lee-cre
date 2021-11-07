@@ -4,17 +4,19 @@ import {
   Switch,
   Route
 } from "react-router-dom"
-
-import Home from './components/home/Home'
-import Process from './components/Process'
-import Contact from './components/Contact'
-import Listings from './components/listings/Listings'
+import AppWrapper from './AppWrapper'
 import Nav from './components/nav/Nav'
 import Footer from './components/nav/Footer'
 
-import AppWrapper from './AppWrapper'
+import Home from './components/home/Home'
+import Listings from './components/listings/Listings'
+import Login from './components/registration/Login'
+
+import Process from './components/Process'
+import Contact from './components/Contact'
 
 const routes = [
+  { path: '/login', component: <Login />},
   { path: '/listings', component: <Listings />},
   { path: '/process', component: <Process />},
   { path: '/contact', component: <Contact />},
