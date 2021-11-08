@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   useRouteMatch,
-  Redirect,
-  useLocation,
-  useHistory
+  Redirect
 } from "react-router-dom"
-import { gql, useLazyQuery, useQuery } from '@apollo/client';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 
 import AppWrapper from './AppWrapper'
 import Nav from './components/nav/Nav'
@@ -22,107 +20,94 @@ import AdminListings from './components/admin/AdminListings'
 import Process from './components/Process'
 import Contact from './components/Contact'
 
+import LinearProgress from '@mui/material/LinearProgress';
 
 const CURRENT_USER_QUERY = gql`
   query currentUser {
     currentUser {
+      id
       email
     }
   }
 `
 
-const AdminRoutes = () => {
+function PrivateRoute({ children, ...rest }) {
+  const token = localStorage.getItem('token')
+  const { loading, data, error } = useQuery(CURRENT_USER_QUERY, {
+    onError: (e) => console.log('error', error),
+    errorPolicy: 'ignore'
+  })
 
-
-  let match = useRouteMatch()
-  // let location = useLocation()
-  // let history = useHistory()
-  // console.log('history', history)
-  // const [loggedIn, setLoggedIn] = useState(false)
-  // let loggedIn = false
-  // const [fetchCurrentUser, { loading, data }] = useLazyQuery(CURRENT_USER_QUERY)
-  // const { loading, data, refetch } = useQuery(CURRENT_USER_QUERY)
-
-  // const fetchCurrentUser = async() => {
-  //   setLoggedIn(false)
-  //   await fetchCurrentUser()
-  //   if (data && data.currentUser) {
-  //     console.log('current user data', data.currentUser)
-  //     console.log('setting logged in user TRUE')
-  //     // setLoggedIn(true)
-  //     // loggedIn = true
-  //     setLoggedIn(true)
+  // const [fetchCurrentUser, { called, loading, data }] = useLazyQuery(CURRENT_USER_QUERY, {
+  //     notifyOnNetworkStatusChange: true
   //   }
+  // )
+
+  // if (error) {
+  //   console.log('error', error)
   // }
 
+  const renderContent = (location) => {
+    // if (!token) {
+    //   console.log('no auth token')
+    //   return (
+    //     <Redirect
+    //       to={{
+    //         pathname: "/login",
+    //         state: { from: location }
+    //       }}
+    //     />
+    //   )
+    // }
 
-  // useEffect(() => {
-  //   // setLoggedIn(false)
-  //   console.log('location changed', location)
-  //   // setLoggedIn(false)
-  //   // loggedIn = false
-  //   // refetch()
-  // }, [location])
+    // fetchCurrentUser()
 
-  // useEffect(() => {
-  //   // setLoggedIn(false)
-  //   console.log('history changed', history)
-  //   // setLoggedIn(false)
-  //   // loggedIn = false
-  //   // refetch()
-  // }, [history])
-  // const bla = async() => {
-  //   await fetchCurrentUser()
-  // }
-
-  // bla()
-  // let loggedIn = false
-  // setLoggedIn(false)
-  // if (data && data.currentUser) {
-  //   console.log('current user data', data.currentUser)
-  //   console.log('setting logged in user TRUE')
-  //   // setLoggedIn(true)
-  //   loggedIn = true
-  //   history.push(history.location.pathname)
-  // } else {
-  //   console.log('pushing to login')
-  //   history.push('/login')
-  //   loggedIn = false
-  // }
-  // fetchCurrentUser()
-
-  // console.log('logged in', loggedIn)
-  const renderComponent = () => {
     if (loading) {
-      return <h1>Loading</h1>
-    } else if (data && data.currentUser) {
-      return <AdminListings />
+      return <LinearProgress />
+    } else if (data?.currentUser) {
+      console.log('logged in user', data.currentUser)
+      return children
     } else {
-      <Redirect to="/login" />
+      console.log('not loading and no data REDIRECTING')
+      return (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: location }
+          }}
+        />
+      )
     }
   }
+
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        renderContent(location)
+      }
+    />
+  );
+}
+
+const AdminRoutes = () => {
+  let match = useRouteMatch()
 
   const routes = [
     {
       path: '/listings',
-      // component: auth.user ? <AdminListings /> : <Redirect to="/login" />
-      // component: renderComponent()
       component: <AdminListings />
     },
   ]
-
-  // if (loading) {
-  //   return <h1>loading</h1>
-  // }
 
   return (
     <Switch>
       {
         routes.map((route) => {
           return (
-            <Route key={route.path} path={`${match.url}${route.path}`}>
+            <PrivateRoute key={route.path} path={`${match.url}${route.path}`}>
               { route.component }
-            </Route>
+            </PrivateRoute>
           )
         })
       }
@@ -140,7 +125,6 @@ const routes = [
 ]
 
 const App = () => {
-
   return (
     <AppWrapper>
       <Router forceRefresh={false}>

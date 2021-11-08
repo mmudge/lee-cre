@@ -9,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../shared/Logo'
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom"
+import RegistrationMenu from '../registration/RegistrationMenu'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -89,6 +90,7 @@ export default function NavBar({navItems}) {
             })
           }
         </Box>
+        <RegistrationMenu />
       </Toolbar>
     </AppBar>
   );

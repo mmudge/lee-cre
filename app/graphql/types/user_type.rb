@@ -5,10 +5,5 @@ module Types
 
     field :id, ID, null: false
     field :email, String, null: true
-    field :token, String, null: true
-    # def token
-    #   form_authenticity_token
-    # end
-
   end
 end
