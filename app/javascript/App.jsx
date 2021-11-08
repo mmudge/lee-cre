@@ -35,6 +35,7 @@ function PrivateRoute({ children, ...rest }) {
   const token = localStorage.getItem('token')
   const { loading, data, error } = useQuery(CURRENT_USER_QUERY, {
     onError: (e) => console.log('error', error),
+    fetchPolicy: "network-only",
     errorPolicy: 'ignore'
   })
 
